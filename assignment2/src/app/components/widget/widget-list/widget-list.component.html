@@ -1,0 +1,77 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text pull-left">
+      <a routerLink="../.." class="cl-text-black cl-icon-padding">
+          <span class="glyphicon glyphicon-chevron-left">
+          </span>
+      </a>
+    </div>
+    <div class="navbar-text pull-right">
+      <a routerLink="./new" class="cl-icon-padding cl-text-black">
+          <span class="glyphicon glyphicon-plus">
+          </span>
+      </a>
+    </div>
+    <a class="navbar-brand cl-text-white cl-text-bold" href="#">
+      Widgets
+    </a>
+  </div>
+</nav>
+
+<div class="container cl-container-padding">
+  <div *ngFor="let widget of widgets">
+    <div [ngSwitch]="widget.widgetType">
+
+      <div *ngSwitchCase="'Heading'">
+        <span class="fa fa-align-justify pull-right" aria-hidden="true"></span>
+        <a routerLink="./{{widget._id}}">
+          <span class="fa fa-cog pull-right"></span>
+        </a>
+        <h2>{{widget.text}}</h2>
+      </div>
+
+      <div *ngSwitchCase="'Youtube'">
+        <div>
+          <span class="fa fa-align-justify pull-right"></span>
+          <a routerLink="./{{widget._id}}">
+            <span class="fa fa-cog pull-right"></span>
+          </a>
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe  class="embed-responsive-item" [src]= getUrl(widget.url)></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'Image'">
+        <span class="fa fa-align-justify pull-right"></span>
+        <a routerLink="./{{widget._id}}">
+          <span class="fa fa-cog pull-right"></span>
+        </a>
+        <img class="img-width" src="{{widget.url}}">
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid row">
+    <div class="pull-right navbar-text">
+
+      <a routerLink="../../../../.." class="cl-icon-padding">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+
+    </div>
+
+    <div class="pull-left navbar-text">
+      <a href="#" class="cl-icon-padding">
+        <span class="glyphicon glyphicon-play"></span>
+      </a>
+      <a href="#" class="cl-icon-padding">
+        <span class="glyphicon glyphicon-eye-open"></span>
+      </a>
+
+    </div>
+  </div>
+</nav>
