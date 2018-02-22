@@ -2,7 +2,7 @@
   <div class="container-fluid row">
 
     <div class="navbar-text pull-left">
-      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page" class="cl-text-black cl-icon-padding">
+      <a routerLink="/user/{{userId}}/website" class="cl-text-black cl-icon-padding">
           <span class="glyphicon glyphicon-chevron-left">
           </span>
       </a>
@@ -13,7 +13,7 @@
           </span>
       </a>
     </div>
-    <a class="navbar-brand cl-text-white cl-text-bold" href="#">
+    <a class="navbar-brand cl-text-white cl-text-bold" routerLink="/user/{{userId}}/website/{{websiteId}}/page">
       Pages
     </a>
   </div>
@@ -25,23 +25,7 @@
     <div *ngFor="let page of pages">
       <li class="list-group-item cl-list-item-borderless">
         <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}/widget">Blog Post</a>
-      </li>
-      <li class="list-group-item cl-list-item-borderless">
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}/widget">Blogs</a>
-      </li>
-      <li class="list-group-item cl-list-item-borderless">
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}/widget">Home</a>
-      </li>
-      <li class="list-group-item cl-list-item-borderless">
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}/widget">About</a>
-      </li>
-      <li class="list-group-item cl-list-item-borderless">
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}/widget">Contact Us</a>
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}/widget">{{page.name}}</a>
       </li>
     </div>
   </ul>

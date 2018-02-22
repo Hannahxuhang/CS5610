@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Website} from '../../../models/website.model.client';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../../../services/user.service.client';
 import {WebsiteService} from '../../../services/website.service.client';
 
 @Component({
@@ -40,9 +39,14 @@ export class WebsiteEditComponent implements OnInit {
     this.website.name = this.websiteForm.value.name;
     this.website.description = this.websiteForm.value.description;
     this.websiteService.updateWebsite(this.websiteId, this.website);
+
+    this.router.navigate(['/user/' + this.userId + '/website']);
   }
 
   delete() {
     this.websiteService.deleteWebsite(this.websiteId);
+    alert('website ' + this.name + ' has been deleted!');
+
+    this.router.navigate(['/user/' + this.userId + '/website']);
   }
 }

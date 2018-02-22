@@ -26,9 +26,7 @@
     <span class="help-block" *ngIf="!password.valid && password.touched">
         Please enter password!
     </span>
-    <button class="btn btn-primary btn-block"
-       type="submit" [disabled]="!f.valid">Login</button>
-    <a class="btn btn-success btn-block"
-       routerLink="/register">Register</a>
+    <button class="btn btn-primary btn-block" type="submit" [disabled]="!f.valid">Login</button>
+    <a class="btn btn-success btn-block" routerLink="/register">Register</a>
   </form>
 </div>

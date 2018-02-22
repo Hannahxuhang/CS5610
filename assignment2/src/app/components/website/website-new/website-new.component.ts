@@ -36,6 +36,9 @@ export class WebsiteNewComponent implements OnInit {
     website.description = this.websiteForm.value.description;
     website.developerId = this.userId;
     this.websiteService.createWebsite(this.userId, website);
+
+    alert('Website created successfully!');
+    this.router.navigate(['/user/' + this.userId + '/website']);
   }
 
 }

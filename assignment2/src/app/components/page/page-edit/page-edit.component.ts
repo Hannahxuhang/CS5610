@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {PageService} from '../../../services/page.service.client';
 import {NgForm} from '@angular/forms';
 import {Page} from '../../../models/page.model.client';
@@ -19,16 +19,21 @@ export class PageEditComponent implements OnInit {
   page: Page;
   title: String;
 
-  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute) { }
+  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   update() {
     this.page.name = this.pageForm.value.name;
     this.page.title = this.pageForm.value.title;
     this.pageService.updatePage(this.pageId, this.page);
+
+    this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page']);
   }
 
   delete() {
     this.pageService.deletePage(this.pageId);
+
+    alert('Page ' + this.name + ' has been deleted!');
+    this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page']);
   }
 
   ngOnInit() {

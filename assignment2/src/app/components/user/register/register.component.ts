@@ -12,8 +12,6 @@ import { ViewChild } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  users = this.userService.users;
-
   @ViewChild('f') registerForm: NgForm;
   username: String;
   password: String;
@@ -26,12 +24,16 @@ export class RegisterComponent implements OnInit {
   register() {
     this.username = this.registerForm.value.username;
     this.password = this.registerForm.value.password;
-    this.verifiedPassword = this.registerForm.value.verifiedPassword;
+    this.verifiedPassword = this.registerForm.value.very_password;
+
+    // console.log('password: ' + this.password);
+    // console.log('verified password: ' + this.verifiedPassword);
+    // console.log(this.password === this.verifiedPassword);
 
     if (this.password !== this.verifiedPassword) {
       this.errorFlag = true;
     } else {
-      const user: User = new User(Math.random(), this.username, this.password, '', '', '');
+      const user: User = new User(Math.round(Math.random() * 1000), this.username, this.password, '', '', '');
       this.userService.createUser(user);
 
       this.router.navigate(['/user', user._id]);
@@ -40,6 +42,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.errorFlag = false;
-    this.errorMessage = 'Please verify your password!';
+    this.errorMessage = 'Password not match!';
   }
 }

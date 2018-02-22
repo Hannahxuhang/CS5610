@@ -22,10 +22,14 @@ export class PageNewComponent implements OnInit {
   constructor(private pageService: PageService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   createPage() {
-    const page = new Page('', '', this.websiteId, '');
+    const page = new Page('' + Math.round(Math.random() * 1000), '', this.websiteId, '');
     page.name = this.pageForm.value.name;
     page.title = this.pageForm.value.title;
     this.pageService.createPage(this.websiteId, page);
+
+    alert('New page ' + page.name + ' has been created!');
+
+    this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page']);
   }
 
   ngOnInit() {

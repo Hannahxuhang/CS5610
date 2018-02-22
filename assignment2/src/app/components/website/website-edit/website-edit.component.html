@@ -7,7 +7,7 @@
             <span class="glyphicon glyphicon-chevron-left"></span>
           </a>
         </p>
-        <a class="cl-text-white navbar-brand cl-text-bold" href="#">
+        <a class="cl-text-white navbar-brand cl-text-bold" routerLink="/user/{{userId}}/website">
           Websites
         </a>
         <a routerLink="/user/{{userId}}/website/new" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
@@ -15,16 +15,9 @@
         </a>
       </div>
     </div>
+
     <div class="col-xs-8">
       <div class="container-fluid">
-        <button class="btn btn-link float-right" (click)="f.ngSubmit.emit()" routerLink="/user/{{userId}}/website"><i
-          class="fa fa-check white-icon"
-          aria-hidden="true"></i>
-          Edit Websites
-        </button>
-        <a routerLink="/user/{{userId}}/webiste" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
-          <span class="glyphicon glyphicon-ok"></span>
-        </a>
       </div>
     </div>
   </div>
@@ -35,24 +28,13 @@
     <ul class="list-group cl-list-group-borderless">
       <div *ngFor="let website of websites">
         <li class="list-group-item cl-list-item-borderless">
-          <a routerLink="/user/{{userId}}/website/"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-          <a routerLink="/user/{{userId}}/webiste/{{website._id}}/page">Blogging App</a>
-        </li>
-        <li class="list-group-item cl-list-item-borderless">
           <a routerLink="/user/{{userId}}/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-          <a routerLink="/user/{{userId}}/website/{{website._id}}/page">Address Book App</a>
+          <a routerLink="/user/{{userId}}/webiste/{{website._id}}/page">{{website.name}}</a>
         </li>
-        <li class="list-group-item cl-list-item-borderless">
-          <a routerLink="/user/{{userId}}/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-          <a routerLink="/user/{{userId}}/website/{{website._id}}/page">Script Testing App</a>
-        </li>
-        <li class="list-group-item cl-list-item-borderless">
-          <a routerLink="/user/{{userId}}/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-          <a routerLink="/user/{{userId}}/website/{{website._id}}/page">Blogger</a>
-      </li>
       </div>
     </ul>
   </div>
+
   <div class="col-xs-8">
     <form (ngSubmit)="update()" #f="ngForm">
       <div class="form-group">
@@ -69,10 +51,17 @@
           {{website.description}}
         </textarea>
       </div>
-      <button routerLink="/user/{{userId}}/website" (click)="delete()" class="btn btn-danger btn-block text-white">
+      <!--<button routerLink="/user/{{userId}}/website" (click)="delete()" class="btn btn-danger btn-block text-white">
         Delete
+      </button>-->
+      <button class="btn btn-primary btn-block text-white" type="submit">
+        Edit Websites
       </button>
     </form>
+    <br>
+    <button (click)="delete()" class="btn btn-danger btn-block text-white">
+      Delete
+    </button>
   </div>
 </div>
 

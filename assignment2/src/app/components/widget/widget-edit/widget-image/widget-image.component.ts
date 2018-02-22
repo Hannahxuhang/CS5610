@@ -32,7 +32,7 @@ export class WidgetImageComponent implements OnInit {
     if (this.wgid !== undefined) {
       this.widget = this.widgetService.findWidgetById(this.wgid);
     } else {
-      this.widget = new Widget('', '', '', '', '', '', '');
+      this.widget = new Widget('' + Math.round(Math.random() * 1000), '', '', '', '', '', '');
     }
     this.text = this.widget.text;
     this.url = this.widget.url;

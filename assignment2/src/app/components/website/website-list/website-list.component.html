@@ -5,7 +5,7 @@
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </p>
-    <a class="cl-text-white navbar-brand cl-text-bold" href="#">
+    <a class="cl-text-white navbar-brand cl-text-bold" routerLink="/user/{{userId}}/website">
       Websites
     </a>
     <a routerLink="/user/{{userId}}/website/new" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
@@ -19,19 +19,7 @@
     <div *ngFor="let website of websites">
       <li class="list-group-item cl-list-item-borderless">
         <a routerLink="/user/{{userId}}/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-        <a routerLink="/user/{{userId}}/website/{{website._id}}/page">Address Book App</a>
-      </li>
-      <li class="list-group-item cl-list-item-borderless">
-        <a routerLink="/user/{{userId}}/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-        <a routerLink="/user/{{userId}}/website/{{website._id}}/page">Blogger</a>
-      </li>
-      <li class="list-group-item cl-list-item-borderless">
-        <a routerLink="/user/{{userId}}/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-        <a routerLink="/user/{{userId}}/website/{{website._id}}/page">Blogging App</a>
-      </li>
-      <li class="list-group-item cl-list-item-borderless">
-        <a routerLink="/user/{{userId}}/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-        <a routerLink="/user/{{userId}}/website/{{website._id}}/page">Script Testing App</a>
+        <a routerLink="/user/{{userId}}/website/{{website._id}}/page">{{website.name}}</a>
       </li>
     </div>
   </ul>

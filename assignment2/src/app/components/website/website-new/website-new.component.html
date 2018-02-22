@@ -17,13 +17,7 @@
     </div>
     <div class="col-xs-8">
       <div class="container-fluid">
-        <button class="btn btn-link float-right" (click)="f.ngSubmit.emit()" routerLink="/user/{{userId}}/website"
-                [disabled]="!f.valid"><i
-          class="fa fa-check white-icon"
-          aria-hidden="true"></i>
-          New Website
-        </button>
-        <a routerLink="/user/:uid/website" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
+        <a routerLink="/user/{{userId}}/website" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
           <span class="glyphicon glyphicon-ok"></span>
         </a>
       </div>
@@ -37,19 +31,7 @@
       <div *ngFor="let website of websites">
         <li class="list-group-item cl-list-item-borderless">
           <a routerLink="/user/{{userId}}/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-          <a routerLink="/user/{{userId}}/website/{{website._id}}/page">Blogging App</a>
-        </li>
-        <li class="list-group-item cl-list-item-borderless">
-          <a routerLink="/user/{{userId}}/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-          <a routerLink="/user/{{userId}}/website/{{website._id}}/page">Address Book App</a>
-        </li>
-        <li class="list-group-item cl-list-item-borderless">
-          <a routerLink="/user/{{userId}}/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-          <a routerLink="/user/{{userId}}/website/{{website._id}}/page">Script Testing App</a>
-        </li>
-        <li class="list-group-item cl-list-item-borderless">
-          <a routerLink="/user/{{userId}}/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-          <a routerLink="/user/{{userId}}/website/{{website._id}}/page">Blogger</a>
+          <a routerLink="/user/{{userId}}/website/{{website._id}}/page">{{website.name}}</a>
         </li>
       </div>
     </ul>
@@ -60,7 +42,8 @@
         <label for="website-name">Name</label>
         <input type="text" class="form-control" id="website-name"
                placeholder="Name"
-               ngModel=""
+               ngModel
+               name="name"
                required
                #name = "ngModel">
         <p class="help-block"
@@ -71,8 +54,11 @@
       <div class="form-group">
         <label for="website-description">Description</label>
         <textarea id="website-description" class="form-control" rows="5"
-                  [(ngModel)]="description"></textarea>
+                  [(ngModel)]="description" name="description"></textarea>
       </div>
+      <button class="btn btn-primary btn-block" type="submit" [disabled]="!f.valid">
+        New Website
+      </button>
     </form>
   </div>
 </div>

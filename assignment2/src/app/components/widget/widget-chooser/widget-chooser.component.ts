@@ -25,5 +25,4 @@ export class WidgetChooserComponent implements OnInit {
       );
     this.widgets = this.widgetService.findWidgetByPageId(this.pageId);
   }
-
 }

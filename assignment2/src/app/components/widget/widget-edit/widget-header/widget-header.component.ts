@@ -28,10 +28,10 @@ export class WidgetHeaderComponent implements OnInit {
           this.pageId = params['pid'];
         }
       );
-    if (this.wgid !== undefined) {
+    if (this.wgid !== undefined && this.wgid !== '') {
       this.widget = this.widgetService.findWidgetById(this.wgid);
     } else {
-      this.widget = new Widget('', '', '', '', '', '', '');
+      this.widget = new Widget('' + Math.round(Math.random() * 1000), '', '', '', '', '', '');
     }
     this.text = this.widget.text;
     this.size = this.widget.size;
