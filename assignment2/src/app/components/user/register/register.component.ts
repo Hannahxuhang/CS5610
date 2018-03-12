@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
     if (this.password !== this.verifiedPassword) {
       this.errorFlag = true;
     } else {
-      const user: User = new User(Math.round(Math.random() * 1000), this.username, this.password, '', '', '');
+      const user: User = new User('' + Math.round(Math.random() * 1000), this.username, this.password, '', '', '');
       this.userService.createUser(user).subscribe(
         (data: User) => {
           this.errorFlag = false;
