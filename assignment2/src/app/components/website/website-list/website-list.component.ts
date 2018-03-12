@@ -10,7 +10,7 @@ import {Website} from '../../../models/website.model.client';
 })
 export class WebsiteListComponent implements OnInit {
 
-  userId: String;
+  userId: string;
   websites = [];
 
   constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute) { }
@@ -20,10 +20,14 @@ export class WebsiteListComponent implements OnInit {
       .subscribe(
         (params: any) => {
           this.userId = params['uid'];
+          this.websiteService.findWebsiteByUser(this.userId).subscribe(
+            (data: Website[]) => {
+              this.websites = data;
+            },
+            (error: any) => console.log(error)
+          );
         }
       );
-
-    this.websites = this.websiteService.findWebsiteByUser(this.userId);
   }
 
 }

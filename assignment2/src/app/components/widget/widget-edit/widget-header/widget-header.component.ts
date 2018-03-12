@@ -12,11 +12,11 @@ import {NgForm} from '@angular/forms';
 export class WidgetHeaderComponent implements OnInit {
 
   @ViewChild('f') widgetForm: NgForm;
-  pageId: String;
-  wgid: String;
+  pageId: string;
+  wgid: string;
   widget: Widget;
-  text: String;
-  size: String;
+  text: string;
+  size: string;
 
   constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -26,37 +26,37 @@ export class WidgetHeaderComponent implements OnInit {
         (params: any) => {
           this.wgid = params['wgid'];
           this.pageId = params['pid'];
+
+          this.widgetService.findWidgetById(this.wgid).subscribe(
+            (widget: Widget) => {
+              this.widget = widget;
+            },
+            (error: any) => console.log(error)
+          );
         }
       );
-    if (this.wgid !== undefined && this.wgid !== '') {
-      this.widget = this.widgetService.findWidgetById(this.wgid);
-    } else {
-      this.widget = new Widget('' + Math.round(Math.random() * 1000), '', '', '', '', '', '');
-    }
-    this.text = this.widget.text;
-    this.size = this.widget.size;
   }
 
-  updateOrCreate() {
+  update() {
     this.widget.text = this.widgetForm.value.text;
     this.widget.size = this.widgetForm.value.size;
     this.widget.widgetType = 'Heading';
-    if (this.wgid !== undefined) {
-      this.widgetService.updateWidget(this.wgid, this.widget);
-      this.router.navigate(['../'], {relativeTo: this.activatedRoute});
-
-    } else {
-      this.widget = this.widgetService.createWidget(this.pageId, this.widget);
-      this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
-    }
+    this.widgetService.updateWidget(this.wgid, this.widget).subscribe(
+      (widget: Widget) => {
+        this.widget = widget;
+        this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
+      },
+      (error: any) => console.log(error)
+    );
   }
 
   delete() {
-    if (this.wgid !== undefined) {
-      this.widgetService.deleteWidget(this.wgid);
-    } else {
-      this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
-    }
+    this.widgetService.deleteWidget(this.wgid).subscribe(
+      () => {
+        this.router.navigate(['../'], { relativeTo: this.activatedRoute });
+      },
+      (error: any) => console.log(error)
+    );
   }
 
 }

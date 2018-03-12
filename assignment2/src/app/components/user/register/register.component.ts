@@ -13,11 +13,11 @@ import { ViewChild } from '@angular/core';
 export class RegisterComponent implements OnInit {
 
   @ViewChild('f') registerForm: NgForm;
-  username: String;
-  password: String;
-  verifiedPassword: String;
+  username: string;
+  password: string;
+  verifiedPassword: string;
   errorFlag: boolean;
-  errorMessage: String;
+  errorMessage: string;
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -34,9 +34,13 @@ export class RegisterComponent implements OnInit {
       this.errorFlag = true;
     } else {
       const user: User = new User(Math.round(Math.random() * 1000), this.username, this.password, '', '', '');
-      this.userService.createUser(user);
-
-      this.router.navigate(['/user', user._id]);
+      this.userService.createUser(user).subscribe(
+        (data: User) => {
+          this.errorFlag = false;
+          this.router.navigate(['/user', data._id]);
+        },
+        (error: any) => console.log(error)
+      );
     }
   }
 

@@ -12,11 +12,11 @@ import {WebsiteService} from '../../../services/website.service.client';
 export class WebsiteEditComponent implements OnInit {
 
   @ViewChild('f') websiteForm: NgForm;
-  websiteId: String;
+  websiteId: string;
   website: Website;
-  name: String;
-  description: String;
-  userId: String;
+  name: string;
+  description: string;
+  userId: string;
   websites = [];
 
   constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute, private router: Router) { }
@@ -27,26 +27,46 @@ export class WebsiteEditComponent implements OnInit {
         (params: any) => {
           this.websiteId = params['wid'];
           this.userId = params['uid'];
+
+          this.websiteService.findWebsiteById(this.websiteId).subscribe(
+            (data: Website) => {
+              this.website = data;
+              this.name = data.name;
+              this.description = data.description;
+            },
+            (error: any) => console.log(error)
+          );
+
+          this.websiteService.findWebsiteByUser(this.userId).subscribe(
+            (data: Website[]) => {
+              this.websites = data;
+            },
+            (error: any) => console.log(error)
+          );
         }
       );
-    this.websites = this.websiteService.findWebsiteByUser(this.userId);
-    this.website = this.websiteService.findWebsiteById(this.websiteId);
-    this.name = this.website.name;
-    this.description = this.website.description;
   }
 
   update() {
     this.website.name = this.websiteForm.value.name;
     this.website.description = this.websiteForm.value.description;
-    this.websiteService.updateWebsite(this.websiteId, this.website);
-
-    this.router.navigate(['/user/' + this.userId + '/website']);
+    this.websiteService.updateWebsite(this.websiteId, this.website).subscribe(
+      (website: Website) => {
+        this.website = website;
+        this.router.navigate(['../'], { relativeTo: this.activatedRoute });
+      },
+      (error: any) => console.log(error)
+    );
   }
 
   delete() {
-    this.websiteService.deleteWebsite(this.websiteId);
-    alert('website ' + this.name + ' has been deleted!');
+    this.websiteService.deleteWebsite(this.websiteId).subscribe(
+      () => {
+        this.router.navigate(['../'], { relativeTo: this.activatedRoute });
+      },
+      (error: any) => console.log(error)
+    );
 
-    this.router.navigate(['/user/' + this.userId + '/website']);
+    alert('website ' + this.name + ' has been deleted!');
   }
 }

@@ -12,12 +12,12 @@ import {Widget} from '../../../../models/widget.model.client';
 export class WidgetYoutubeComponent implements OnInit {
 
   @ViewChild('f') widgetForm: NgForm;
-  pageId: String;
-  wgid: String;
+  pageId: string;
+  wgid: string;
   widget: Widget;
-  text: String;
-  url: String;
-  width: String;
+  text: string;
+  url: string;
+  width: string;
 
   constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -27,40 +27,35 @@ export class WidgetYoutubeComponent implements OnInit {
         (params: any) => {
           this.wgid = params['wgid'];
           this.pageId = params['pid'];
-        }
-      );
-    if (this.wgid !== undefined) {
-      this.widget = this.widgetService.findWidgetById(this.wgid);
-    } else {
-      this.widget = new Widget('' + Math.round(Math.random() * 1000), '', '', '', '', '', '');
-    }
-    this.text = this.widget.text;
-    this.url = this.widget.url;
-    this.width = this.widget.width;
+          this.widgetService.findWidgetById(this.wgid).subscribe(
+            (widget: Widget) => {
+              this.widget = widget;
+            },
+            (error: any) => console.log(error)
+          );
+      });
   }
 
-  updateOrCreate() {
+  update() {
     this.widget.text = this.widgetForm.value.text;
     this.widget.width = this.widgetForm.value.width;
     this.widget.url = this.widgetForm.value.url;
     this.widget.widgetType = 'Youtube';
-    if (this.wgid !== undefined) {
-      this.widgetService.updateWidget(this.wgid, this.widget);
-      this.router.navigate(['../'], {relativeTo: this.activatedRoute});
-
-    } else {
-      this.widget = this.widgetService.createWidget(this.pageId, this.widget);
-      this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
-
-    }
+    this.widgetService.updateWidget(this.wgid, this.widget).subscribe(
+      (widget: Widget) => {
+        this.widget = widget;
+        this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
+      },
+      (error: any) => console.log(error)
+    );
   }
 
   delete() {
-    if (this.wgid !== undefined) {
-      this.widgetService.deleteWidget(this.wgid);
-    } else {
-      this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
-    }
+    this.widgetService.deleteWidget(this.wgid).subscribe(
+      () => {
+        this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
+      }
+    )
   }
 
 }

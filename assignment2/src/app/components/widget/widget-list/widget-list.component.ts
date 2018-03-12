@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {WidgetService} from '../../../services/widget.service.client';
 import {DomSanitizer} from '@angular/platform-browser';
+import {Widget} from '../../../models/widget.model.client';
 
 @Component({
   selector: 'app-widget-list',
@@ -11,7 +12,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class WidgetListComponent implements OnInit {
 
   widgets = [];
-  pageId: String;
+  pageId: string;
 
   constructor(private domSanitizer: DomSanitizer, private widgetService: WidgetService, private activatedRoute: ActivatedRoute) { }
 
@@ -24,9 +25,18 @@ export class WidgetListComponent implements OnInit {
       .subscribe(
         (params: any) => {
           this.pageId = params['pid'];
+          this.widgetService.findWidgetByPageId(this.pageId).subscribe(
+            (widgets: Widget[]) => {
+              this.widgets = widgets;
+            },
+            (error: any) => console.log(error)
+          );
         }
       );
-    this.widgets = this.widgetService.findWidgetByPageId(this.pageId);
   }
 
+  reorderWidgets(indexes) {
+    console.log('start: ' + indexes.startIndex);
+    console.log('stop: ' + indexes.endIndex);
+  }
 }

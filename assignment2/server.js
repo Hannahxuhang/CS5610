@@ -7,6 +7,7 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const app = express();
 
+// Install, load and configure body parser module
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -47,6 +48,8 @@ app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 */
+require("./assignment/app.js")(app);
 
-
-server.listen( port , () => console.log('Running'));
+server.listen( port , function() {
+  console.log('Node app is running on port', app.get('port'))
+});

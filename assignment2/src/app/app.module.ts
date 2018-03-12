@@ -27,6 +27,8 @@ import { UserService } from './services/user.service.client';
 import { PageService } from './services/page.service.client';
 import { WebsiteService } from './services/website.service.client';
 import { WidgetService} from './services/widget.service.client';
+import { SortableDirective } from '../../assignment/directives/sortable.directive';
+import {HttpModule} from '@angular/http';
 
 
 @NgModule({
@@ -47,12 +49,14 @@ import { WidgetService} from './services/widget.service.client';
     WidgetHeaderComponent,
     WidgetImageComponent,
     WidgetYoutubeComponent,
-    HomeComponent
+    HomeComponent,
+    SortableDirective
   ],
   imports: [
     BrowserModule,
     Routing,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
   providers: [UserService, PageService, WebsiteService, WidgetService],
   bootstrap: [AppComponent]

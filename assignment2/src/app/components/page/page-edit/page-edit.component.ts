@@ -12,28 +12,36 @@ import {Page} from '../../../models/page.model.client';
 export class PageEditComponent implements OnInit {
 
   @ViewChild('f') pageForm: NgForm;
-  userId: String;
-  websiteId: String;
-  pageId: String;
-  name: String;
+  userId: string;
+  websiteId: string;
+  pageId: string;
+  name: string;
   page: Page;
-  title: String;
+  title: string;
 
   constructor(private pageService: PageService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   update() {
     this.page.name = this.pageForm.value.name;
     this.page.title = this.pageForm.value.title;
-    this.pageService.updatePage(this.pageId, this.page);
-
-    this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page']);
+    this.pageService.updatePage(this.pageId, this.page).subscribe(
+      (page: Page) => {
+        this.page = page;
+        this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page']);
+      },
+      (error: any) => console.log(error)
+    );
   }
 
   delete() {
-    this.pageService.deletePage(this.pageId);
+    this.pageService.deletePage(this.pageId).subscribe(
+      () => {
+        this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page']);
+      },
+      (error: any) => console.log(error)
+    );
 
     alert('Page ' + this.name + ' has been deleted!');
-    this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page']);
   }
 
   ngOnInit() {
@@ -43,11 +51,16 @@ export class PageEditComponent implements OnInit {
           this.userId = params['uid'];
           this.websiteId = params['wid'];
           this.pageId = params['pid'];
+
+          this.pageService.findPageById(this.pageId).subscribe(
+            (page: Page) => {
+              this.page = page;
+              this.name = page.name;
+              this.title = page.title;
+            },
+            (error: any) => console.log(error)
+          );
         }
       );
-    this.page = this.pageService.findPageById(this.pageId);
-    this.name = this.page.name;
-    this.title = this.page.title;
   }
-
 }

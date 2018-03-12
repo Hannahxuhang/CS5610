@@ -13,10 +13,10 @@ import { ViewChild } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   @ViewChild('f') loginForm: NgForm;
-  username: String; // see usage as two-way data binding
-  password: String; // see usage as two-way data binding
+  username: string; // see usage as two-way data binding
+  password: string; // see usage as two-way data binding
   errorFlag: boolean;
-  errorMessage: String;
+  errorMessage: string;
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -25,15 +25,19 @@ export class LoginComponent implements OnInit {
     this.password = this.loginForm.value.password;
     alert(this.username);
 
-    const user: User = this.userService.findUserByCredentials(this.username, this.password);
-
-    console.log('user: ' + user);
-
-    if (user) {
-      this.router.navigate(['/user', user._id]);
-    } else {
-      this.errorFlag = true;
-    }
+    this.userService.findUserByCredentials(this.username, this.password)
+      .subscribe(
+        (user: User) => {
+          if (typeof user._id === 'undefined') {
+            this.errorFlag = true;
+          } else {
+            this.router.navigate(['/user', user._id])
+          }
+        },
+        (error: any) => {
+          this.errorFlag = true;
+        }
+      );
   }
 
   ngOnInit() {

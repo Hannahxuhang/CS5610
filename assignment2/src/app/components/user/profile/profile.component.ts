@@ -12,22 +12,24 @@ import {User} from '../../../models/user.model.client';
 export class ProfileComponent implements OnInit {
 
   @ViewChild('f') profileForm: NgForm;
-  userId: String;
+  userId: string;
   user: User;
-  username: String;
-  email: String;
-  firstName: String;
-  lastName: String;
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
 
   constructor(private userService: UserService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   update() {
-    this.user.username = this.profileForm.value.username;
-    this.user.firstName = this.profileForm.value.firstName;
-    this.user.lastName = this.profileForm.value.lastName;
-    this.user.email = this.profileForm.value.email;
-    this.userService.updateUser(this.userId, this.user);
-    this.router.navigate(['user', this.user._id]);
+    if (this.user.username && this.user.password) {
+      this.userService.updateUser(this.userId, this.user).subscribe(
+        (user: User) => {
+          this.user = user;
+        },
+        (error: any) => console.log(error)
+      );
+    }
   }
 
   ngOnInit() {
@@ -35,13 +37,18 @@ export class ProfileComponent implements OnInit {
       .subscribe(
         (params: any) => {
           this.userId = params['uid'];
+          this.userService.findUserById(this.userId).subscribe(
+            (user: User) => {
+              this.user = user;
+              this.username = this.user.username;
+              this.email = this.user.email;
+              this.firstName = this.user.firstName;
+              this.lastName = this.user.lastName;
+            },
+            (error: any) => console.log(error)
+          );
         }
       );
-    this.user = this.userService.findUserById(this.userId);
-    this.username = this.user.username;
-    this.email = this.user.email;
-    this.firstName = this.user.firstName;
-    this.lastName = this.user.lastName;
   }
 
 }

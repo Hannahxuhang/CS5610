@@ -12,10 +12,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class WebsiteNewComponent implements OnInit {
 
   @ViewChild('f') websiteForm: NgForm;
-  websiteId: String;
-  name: String;
-  description: String;
-  userId: String;
+  websiteId: string;
+  name: string;
+  description: string;
+  userId: string;
   websites = [];
 
   constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute, private router: Router) { }
@@ -25,9 +25,14 @@ export class WebsiteNewComponent implements OnInit {
       .subscribe(
         (params: any) => {
           this.userId = params['uid'];
+          this.websiteService.findWebsiteByUser(this.userId).subscribe(
+            (data: Website[]) => {
+              this.websites = data;
+            },
+            (error: any) => console.log(error)
+          );
         }
       );
-    this.websites = this.websiteService.findWebsiteByUser(this.userId);
   }
 
   createWebsite() {
@@ -35,10 +40,13 @@ export class WebsiteNewComponent implements OnInit {
     website.name = this.websiteForm.value.name;
     website.description = this.websiteForm.value.description;
     website.developerId = this.userId;
-    this.websiteService.createWebsite(this.userId, website);
+    this.websiteService.createWebsite(this.userId, website).subscribe(
+      (data: any) => {
+        this.router.navigate(['/user/' + this.userId + '/website']);
+      }
+    )
 
     alert('Website created successfully!');
-    this.router.navigate(['/user/' + this.userId + '/website']);
   }
 
 }

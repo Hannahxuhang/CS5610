@@ -14,16 +14,27 @@
   </div>
 </nav>
 
-<div class="container-fluid cl-container-padding">
-  <ul class="list-group cl-list-group-borderless">
-    <li class="list-group-item cl-list-item-borderless">
-      <a routerLink="./header">Header</a>
+<div class="container-fluid container-padding">
+  <ul class="ul-no-style">
+    <li class="li-margin">
+      <a (click)="createWidget('HEADING')">
+        Header
+      </a>
     </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a routerLink="./image">Image</a>
+    <li class="li-margin">
+      <a (click)="createWidget('HTML')">
+        HTML
+      </a>
     </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a routerLink="./youtube">YouTube</a>
+    <li class="li-margin">
+      <a (click)="createWidget('IMAGE')">
+        Image
+      </a>
+    </li>
+    <li class="li-margin">
+      <a (click)="createWidget('YOUTUBE')">
+        YouTube
+      </a>
     </li>
   </ul>
 </div>

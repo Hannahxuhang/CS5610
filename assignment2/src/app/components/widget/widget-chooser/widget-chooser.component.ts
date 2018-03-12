@@ -10,9 +10,8 @@ import {Widget} from '../../../models/widget.model.client';
 })
 export class WidgetChooserComponent implements OnInit {
 
-  widgets = [];
-  widgetId: String;
-  pageId: String;
+  widgetId: string;
+  pageId: string;
 
   constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -23,6 +22,18 @@ export class WidgetChooserComponent implements OnInit {
           this.pageId = params['pid'];
         }
       );
-    this.widgets = this.widgetService.findWidgetByPageId(this.pageId);
+  }
+
+  createWidget(widgetType: string) {
+    const wid = '' + Math.round(Math.random() * 1000);
+    let widget = new Widget(wid, widgetType, this.pageId);
+
+    this.widgetService.createWidget(this.pageId, widget).subscribe(
+      (data: Widget) => {
+        widget = data;
+        this.router.navigate(['../', widget._id], { relativeTo: this.activatedRoute });
+      },
+      (error: any) => console.log(error)
+    );
   }
 }
