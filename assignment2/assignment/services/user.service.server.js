@@ -62,6 +62,9 @@ module.exports = function (app) {
     var username = req.query['username'];
     var password = req.query['password'];
 
+    console.log(username);
+    console.log(password);
+
     var user = null;
 
     if (username && password) {
