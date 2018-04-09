@@ -1,117 +1,109 @@
-#homepage_title {
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 10%;
-  text-align: center;
-  font-family: 'Rammetto One', cursive;
-  width: 16em;
-}
-
-#profile-brand {
-  color: white;
-}
+/* You can add global styles to this file, and also import other style files */
 
 body {
   padding-top: 70px;
   padding-bottom: 70px;
-  font-family: 'Josefin Slab', serif;
-}
-input.form-control {
-  margin-bottom: 5px;
 }
 
-.cl-form-bottom-padding{
-  margin-bottom: 2em;
-}
-
-a:hover{
+a:hover {
   text-decoration: none;
 }
 
-.cl-container-padding {
-  padding-top: 5%;
-  padding-bottom: 10%;
+html,body {
+  height: 100%;
 }
 
-.cl-blue-navbar{
-  background-color: #337ab7;
+.container-padding {
+  padding-bottom: 70px;
 }
 
-.cl-text-white{
-  color: #fff;
+.container-height {
+  height: 100%;
 }
 
-.cl-text-black{
-  color: #000000;
+input.form-control {
+  margin-bottom: 10px;
 }
 
-.cl-text-bold{
+.btn {
+  margin-bottom: 10px;
+}
+
+.navbar-text {
+  font-size: 20px;
   font-weight: bold;
 }
 
-.cl-icon-padding {
-  padding-left: 10px;
-  padding-right: 10px;
+.white-text {
+  color: #FFFFFF;
 }
 
-.cl-header-padding{
-  padding-left: 5%;
+.black-text {
+  color: #000000;
 }
 
-.cl-full-width{
+.grey-text {
+  color: #999999;
+}
+
+.nav-blue {
+  background-color: #337ab7;
+}
+
+.nav-grey {
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
+}
+
+.icon-padding {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.ul-no-style {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.li-margin {
+  font-size: 18px;
+  margin: 18px;
+  padding: 0;
+}
+
+textarea {
+  margin-bottom: 10px;
+}
+
+.divider {
+  height: 100%;
+  border-right: 1px solid;
+}
+
+.widget {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.widget-image {
+  display: inline;
   width: 100%;
 }
 
-.cl-widget-list-item{
-  padding-bottom: 20px;
-}
-
-.cl-v-divider{
-  border-right: 1px solid #808080;
-  height: 100%;
-}
-
-.cl-widget-heading{
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.cl-widget-paragraph{
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.cl-height{
-  height: 100%;
-  min-height: 100%;
-}
-
-.cl-relative-position{
-  position: relative;
-}
-.cl-absolute-position{
-  position: absolute;
-}
-.cl-widget-list-icons{
-  top: 0px;
-  right: 0px;
-  z-index: 10;
+.widget-icons{
   background-color: white;
-}
-.cl-zero-right-padding{
-  padding-right: 0px;
-}
-
-.cl-list-item-borderless {
-  border-top: 0 none;
-  border-bottom: 0 none;
-  border-left: 0 none;
-  border-right: 0 none;
-}
-
-.cl-widget-images{
-  display: inline;
-  width: 85%;
+  position: absolute;
   z-index: 100;
-  position: relative;
+  top: 0;
+  right: 0;
+}
+
+.index-style {
+  padding: 20%;
+}
+
+input.ngInvalid.ngTouched {
+  color: red;
 }

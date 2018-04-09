@@ -1,12 +1,9 @@
-import { Page } from '../models/page.model.client';
-import { Injectable } from '@angular/core';
-import 'rxjs/Rx';
-import { Http, Response } from '@angular/http';
-import { environment } from '../../environments/environment';
+import {Injectable} from '@angular/core';
+import {Page} from '../models/page.model.client';
+import {Http, Response} from '@angular/http';
+import {environment} from '../../environments/environment';
 
-// Injecting service into modules
 @Injectable()
-
 export class PageService {
 
   constructor(private _http: Http) {}
